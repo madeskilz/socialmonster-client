@@ -1,6 +1,6 @@
 import {
   SET_SCREAMS,
-  SET_SCREAM,
+  POST_SCREAM,
   LOADING_DATA,
   LIKE_SCREAM,
   UNLIKE_SCREAM,
@@ -39,6 +39,11 @@ export default function(state = initialState, action) {
         screams: state.screams.filter(
           scream => scream.screamId !== action.payload
         )
+      };
+    case POST_SCREAM:
+      return {
+        ...state,
+        screams: [action.payload, ...state.screams]
       };
     default:
       return state;

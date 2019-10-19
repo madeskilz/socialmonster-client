@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { likeScream, unlikeScream } from "../redux/actions/dataActions";
 import MyButton from "../util/MyButton";
 import DeleteScream from "./DeleteScream";
+import ScreamDialog from "./ScreamDialog";
 //MUI Stuff
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -108,11 +109,12 @@ class Scream extends Component {
           </Typography>
           <Typography variant="body1">{body}</Typography>
           {likeButton}
-          <span>{likeCount ? likeCount : 0} Likes</span>
+          <span>{likeCount} Likes</span>
           <MyButton tip="Comments">
             <ChatIcon color="primary" />
           </MyButton>
-          <span>{commentCount ? commentCount : 0} Comments</span>
+          <span>{commentCount} Comments</span>
+          <ScreamDialog screamId={screamId} userHandle={userHandle}/>
         </CardContent>
       </Card>
     );
