@@ -24,7 +24,7 @@ const styles = theme => ({
     margin: 4
   },
   profileImage: {
-    maxWidth: 200,
+    width: 200,
     height: 200,
     borderRadius: "50%",
     objectFit: "cover"
@@ -42,7 +42,7 @@ const styles = theme => ({
   },
   spinnerDiv: {
     textAlign: "center",
-    marginTop:"50px 0 50px"
+    marginTop: "50px 0 50px 0"
   }
 });
 class ScreamDialog extends Component {
@@ -59,18 +59,16 @@ class ScreamDialog extends Component {
   render() {
     const {
       classes,
-      data: {
-        scream: {
-          screamId,
-          body,
-          userHandle,
-          createdAt,
-          likeCount,
-          commentCount,
-          userImgUrl
-        },
-        loading
-      }
+      scream: {
+        screamId,
+        body,
+        userHandle,
+        createdAt,
+        likeCount,
+        commentCount,
+        userImgUrl
+      },
+      UI: { loading }
     } = this.props;
     const dialogMarkup = loading ? (
       <div>
@@ -120,7 +118,7 @@ class ScreamDialog extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           fullWidth
-          maxWidth="md"
+          maxWidth="sm"
         >
           <MyButton
             tip="Close"
@@ -142,11 +140,13 @@ ScreamDialog.propTypes = {
   getScream: PropTypes.func.isRequired,
   screamId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired
+  scream: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  data: state.data
+  scream: state.data.scream,
+  UI: state.UI
 });
 
 const mapActionsToProps = {
