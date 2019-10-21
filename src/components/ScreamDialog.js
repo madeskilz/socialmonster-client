@@ -6,7 +6,6 @@ import { getScream } from "../redux/actions/dataActions";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import MyButton from "../util/MyButton";
 import { UnfoldMore, Close as CloseIcon } from "@material-ui/icons";
 import {
@@ -19,11 +18,32 @@ import {
   Grid
 } from "@material-ui/core";
 const styles = theme => ({
-    ...theme.styles,
-    invisibleSeparator:{
-        border: "none",
-        margin: 4
-    }
+  ...theme.styles,
+  invisibleSeparator: {
+    border: "none",
+    margin: 4
+  },
+  profileImage: {
+    maxWidth: 200,
+    height: 200,
+    borderRadius: "50%",
+    objectFit: "cover"
+  },
+  dialogContent: {
+    padding: 20
+  },
+  closeButton: {
+    position: "absolute",
+    left: "90%"
+  },
+  expandButton: {
+    position: "absolute",
+    left: "90%"
+  },
+  spinnerDiv: {
+    textAlign: "center",
+    marginTop:"50px 0 50px"
+  }
 });
 class ScreamDialog extends Component {
   state = {
@@ -39,19 +59,27 @@ class ScreamDialog extends Component {
   render() {
     const {
       classes,
-      scream: {
-        screamId,
-        body,
-        userHandle,
-        createdAt,
-        likeCount,
-        commentCount,
-        userImgUrl
-      },
-      UI: { loading }
+      data: {
+        scream: {
+          screamId,
+          body,
+          userHandle,
+          createdAt,
+          likeCount,
+          commentCount,
+          userImgUrl
+        },
+        loading
+      }
     } = this.props;
     const dialogMarkup = loading ? (
-      <CircularProgress size={200} />
+      <div>
+        <CircularProgress
+          thickness={2}
+          className={classes.spinnerDiv}
+          size={200}
+        />
+      </div>
     ) : (
       <Grid container spacing={16}>
         <Grid item sm={5}>
@@ -71,6 +99,11 @@ class ScreamDialog extends Component {
             @{userHandle}
           </Typography>
           <hr className={classes.invisibleSeparator} />
+          <Typography variant="body2" color="textSecondary">
+            {dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
+          </Typography>
+          <hr className={classes.invisibleSeparator} />
+          <Typography variant="body1">{body}</Typography>
         </Grid>
       </Grid>
     );
@@ -109,13 +142,11 @@ ScreamDialog.propTypes = {
   getScream: PropTypes.func.isRequired,
   screamId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
-  scream: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  scream: state.data.scream,
-  Ui: state.UI
+  data: state.data
 });
 
 const mapActionsToProps = {
