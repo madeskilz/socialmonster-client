@@ -4,9 +4,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import withStyles from "@material-ui/core/styles/withStyles";
 import dayjs from "dayjs";
-import { uploadImage, logoutUser } from "../redux/actions/userActions";
+import { uploadImage, logoutUser } from "../../redux/actions/userActions";
 import EditDetails from "./EditDetails";
-import MyButton from "../util/MyButton";
+import MyButton from "../../util/MyButton";
+import ProfileSkeleton from "../../util/ProfileSkeleton";
 //MUI Stuffs
 import { Button, Paper, Link as MuiLink, Typography } from "@material-ui/core";
 //Icons
@@ -17,53 +18,9 @@ import {
   Edit as EditIcon,
   KeyboardReturn
 } from "@material-ui/icons";
-const styles = {
-  paper: {
-    padding: 20
-  },
-  profile: {
-    "& .image-wrapper": {
-      textAlign: "center",
-      position: "relative",
-      "& button": {
-        position: "absolute",
-        top: "80%",
-        left: "70%"
-      }
-    },
-    "& .profile-image": {
-      width: 200,
-      height: 200,
-      objectFit: "cover",
-      maxWidth: "100%",
-      borderRadius: "50%"
-    },
-    "& .profile-details": {
-      textAlign: "center",
-      "& span, svg": {
-        verticalAlign: "middle"
-      },
-      "& a": {
-        color: "#00bcd4"
-      }
-    },
-    "& hr": {
-      border: "none",
-      margin: "0 0 10px 0"
-    },
-    "& svg.button": {
-      "&:hover": {
-        cursor: "pointer"
-      }
-    }
-  },
-  buttons: {
-    textAlign: "center",
-    "& a": {
-      margin: "20px 10px"
-    }
-  }
-};
+const styles = theme=>({
+  ...theme.styles
+});
 class Profile extends Component {
   handleImageChange = e => {
     const image = e.target.files[0];
@@ -111,7 +68,7 @@ class Profile extends Component {
             <div className="profile-details">
               <MuiLink
                 component={Link}
-                to={`/user/${handle}`}
+                to={`/users/${handle}`}
                 color="primary"
                 variant="h5"
               >
@@ -171,7 +128,7 @@ class Profile extends Component {
         </Paper>
       )
     ) : (
-      <h5>Social Monster is Loading User...</h5>
+      <ProfileSkeleton />
     );
     return profileMarkup;
   }

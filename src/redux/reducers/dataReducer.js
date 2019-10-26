@@ -5,6 +5,7 @@ import {
   LIKE_SCREAM,
   UNLIKE_SCREAM,
   DELETE_SCREAM,
+  SUBMIT_COMMENT,
   SET_SCREAM
 } from "../types";
 const initialState = {
@@ -36,8 +37,19 @@ export default function(state = initialState, action) {
         scream => scream.screamId === action.payload.screamId
       );
       state.screams[index] = action.payload;
+      if (state.scream.screamId === action.payload.screamId) {
+        state.scream = action.payload;
+      }
       return {
         ...state
+      };
+    case SUBMIT_COMMENT:
+      return {
+        ...state,
+        scream: {
+          ...state.scream,
+          comments: [action.payload, ...state.scream.comments]
+        }
       };
     case DELETE_SCREAM:
       return {

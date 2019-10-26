@@ -2,8 +2,8 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/styles";
-import { postScream, clearErrors } from "../redux/actions/dataActions";
-import MyButton from "../util/MyButton";
+import { postScream, clearErrors } from "../../redux/actions/dataActions";
+import MyButton from "../../util/MyButton";
 import { Add as AddIcon, Close as CloseIcon } from "@material-ui/icons";
 import {
   Button,

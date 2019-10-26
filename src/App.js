@@ -11,9 +11,10 @@ import { logoutUser, getUserData} from "./redux/actions/userActions";
 import home from "./pages/home";
 import login from "./pages/login";
 import signup from "./pages/signup";
+import user from "./pages/user";
 
 //Components
-import Navbar from "./components/Navbar";
+import Navbar from "./components/layout/Navbar";
 //Util
 import themeObject from "./util/theme";
 import AuthRoute from "./util/AuthRoute";
@@ -32,6 +33,10 @@ if (token) {
   }
 }
 class App extends Component {
+  componentDidMount() {
+    store.dispatch(getUserData());
+    Axios.defaults.headers.common['Authorization'] = token;
+  }
   render() {
     return (
       <MuiThemeProvider theme={theme}>
@@ -51,6 +56,8 @@ class App extends Component {
                   path="/signup"
                   component={signup}
                 />
+                <Route exact path="/users/:handle" component={user} />
+                <Route exact path="/users/:handle/scream/:screamId" component={user} />
               </Switch>
             </div>
           </Router>
