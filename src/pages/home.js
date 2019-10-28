@@ -12,11 +12,13 @@ class home extends Component {
   }
   render() {
     const { screams, loading } = this.props.data;
-    let recentScreamsMarkup = !loading
-      ? screams.map(scream => (
-          <Scream scream={scream} key={scream.screamId}></Scream>
-        ))
-      : Array.from({ length: 3 }).map(i => <ScreamSkeleton key={Math.random()} />);
+    let recentScreamsMarkup = !loading ? (
+      screams.map(scream => (
+        <Scream scream={scream} key={scream.screamId}></Scream>
+      ))
+    ) : (
+      <ScreamSkeleton />
+    );
     return (
       <Grid container spacing={2}>
         <Grid item sm={8} xs={12}>

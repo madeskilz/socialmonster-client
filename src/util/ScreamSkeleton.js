@@ -44,10 +44,9 @@ const styles = {
 };
 const ScreamSkeleton = props => {
   const { classes } = props;
-
-  return (
+  const screamSkeleton = Array.from({ length: 3 }).map(i => (
     <Fragment>
-      <Card className={classes.card}>
+      <Card className={classes.card} key={Math.random()}>
         <CardMedia className={classes.cover} image={NoImg} />
         <CardContent className={classes.cardContent}>
           <div className={classes.handle} />
@@ -58,7 +57,8 @@ const ScreamSkeleton = props => {
         </CardContent>
       </Card>
     </Fragment>
-  );
+  ));
+  return screamSkeleton;
 };
 ScreamSkeleton.propTypes = {
   classes: PropTypes.object.isRequired

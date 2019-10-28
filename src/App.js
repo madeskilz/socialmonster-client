@@ -21,6 +21,7 @@ import AuthRoute from "./util/AuthRoute";
 import Axios from "axios";
 
 const theme = createMuiTheme(themeObject);
+Axios.defaults.baseURL = "https://europe-west1-socialmonster-b9de3.cloudfunctions.net/api";
 const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token);
