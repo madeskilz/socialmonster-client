@@ -37,5 +37,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://europe-west1-socialmonster-b9de3.cloudfunctions.net/api"
+  "proxy": "https://europe-west1-socialmonster-b9de3.cloudfunctions.net/api",
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
+  }
 }
