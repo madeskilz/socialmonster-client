@@ -27,7 +27,7 @@ class login extends Component {
       errors: {}
     };
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     nextProps.UI.errors && this.setState({ errors: nextProps.UI.errors });
   }
   handleSubmit = e => {

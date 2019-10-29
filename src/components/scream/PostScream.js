@@ -31,7 +31,7 @@ const styles = theme => ({
 });
 class PostScream extends Component {
   state = { open: false, body: "", errors: {} };
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     nextProps.UI.errors && this.setState({ errors: nextProps.UI.errors });
     !nextProps.UI.errors &&
       !nextProps.UI.loading &&
