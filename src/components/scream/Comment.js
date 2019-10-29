@@ -8,7 +8,7 @@ const styles = theme => ({
   ...theme.styles,
   commentImage: {
     width: "100%",
-    height: 100,
+    height: "auto",
     objectFit: "cover",
     borderRadius: "50%"
   },
@@ -20,7 +20,7 @@ class Comments extends Component {
   render() {
     const { comments, classes } = this.props;
     return (
-      <Grid container>
+      <Grid container spacing={2}>
         {comments.map((comment, index) => {
           const { body, createdAt, userImgUrl, userHandle } = comment;
           return (
