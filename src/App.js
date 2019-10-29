@@ -7,6 +7,7 @@ import jwtDecode from "jwt-decode";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { logoutUser, getUserData} from "./redux/actions/userActions";
+import {SET_AUTHENTICATED} from "./redux/types"
 //Pages
 import home from "./pages/home";
 import login from "./pages/login";
@@ -29,15 +30,12 @@ if (token) {
     store.dispatch(logoutUser());
     window.location.href = "/login";
   } else {
-    store.dispatch(getUserData());
+    store.dispatch({ type: SET_AUTHENTICATED });
     Axios.defaults.headers.common['Authorization'] = token;
+    store.dispatch(getUserData());
   }
 }
 class App extends Component {
-  componentDidMount() {
-    store.dispatch(getUserData());
-    Axios.defaults.headers.common['Authorization'] = token;
-  }
   render() {
     return (
       <MuiThemeProvider theme={theme}>
