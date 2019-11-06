@@ -24,10 +24,13 @@ export const loginUser = (userData, history) => dispatch => {
       history.push("/");
     })
     .catch(err => {
+      // console.warn(err.toJSON().message);return;
       let ERD =
-        typeof err.response.data === "string"
-          ? { general: err.response.data }
-          : err.response.data;
+        typeof err.response !== "undefined"
+          ? err.response.data === "string"
+            ? { general: err.response.data }
+            : err.response.data
+          : { general: err.toJSON().message };
 
       dispatch({ type: SET_ERRORS, payload: ERD });
     });
